@@ -8,6 +8,9 @@
  * - Enter to submit (Shift+Enter for new line)
  * - Disabled during loading state
  * - Inline send button
+ * - Form validation using react-hook-form, e.g. 
+ *   import { useForm } from 'react-hook-form';
+ *   import { zodResolver } from '@hookform/resolvers/zod';
  * 
  * @param {Object} props - Component props
  * @param {string} props.value - Current input value
