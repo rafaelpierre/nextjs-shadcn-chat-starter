@@ -5,6 +5,7 @@
 import type { AppRoutes, LayoutRoutes, ParamMap } from "./routes.js"
 import type { ResolvingMetadata, ResolvingViewport } from "next/types.js"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type AppPageConfig<Route extends AppRoutes = AppRoutes> = {
   default: React.ComponentType<{ params: Promise<ParamMap[Route]> } & any> | ((props: { params: Promise<ParamMap[Route]> } & any) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
   generateStaticParams?: (props: { params: ParamMap[Route] }) => Promise<any[]> | any[]
@@ -34,14 +35,17 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   metadata?: any
   viewport?: any
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 
 // Validate ../../app/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
+  // @ts-expect-error - Type validation block for Next.js
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- intentionally unused for type validation
   const handler = {} as typeof import("../../app/page.js")
   type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- intentionally unused for type validation
   type __Unused = __Check
 }
 
@@ -54,8 +58,10 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 // Validate ../../app/layout.tsx
 {
   type __IsExpected<Specific extends LayoutConfig<"/">> = Specific
+  // @ts-expect-error - Type validation block for Next.js
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- intentionally unused for type validation
   const handler = {} as typeof import("../../app/layout.js")
   type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- intentionally unused for type validation
   type __Unused = __Check
 }
